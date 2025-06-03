@@ -3,29 +3,25 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
+# Define variables
+APP_DIR="/var/www/html/dino-game"  #actual app directory
+REPO_BRANCH="main"  # Change if your branch is different
+
 # Navigate to the application directory
-cd /var/www/html/dino-game/build
+cd "$APP_DIR"
 
-# Pull the latest changes from the main branch
-git pull origin main
+# Pull the latest changes from the repository
+git pull origin "$REPO_BRANCH"
 
-# Install backend dependencies (if applicable)
-npm install
-
-# Navigate to the React frontend directory
-cd client
-
-# Install frontend dependencies
+# Install dependencies
 npm install
 
 # Build the React application for production
 npm run build
 
-# Return to the root directory
-cd ..
-
 # Copy the build files to the Nginx HTML directory
-sudo cp -r client/build/* /var/www/html/
+sudo mkdir -p /var/www/html/dino-game/build
+sudo cp -r build/* /var/www/html/dino-game/build/
 
 # Restart Nginx to apply the changes
 sudo systemctl restart nginx
