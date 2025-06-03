@@ -19,9 +19,5 @@ npm install
 # Build the React application for production
 npm run build
 
-# Copy the build files to the Nginx HTML directory
-sudo mkdir -p /var/www/html/dino-game/build
-sudo cp -r build/* /var/www/html/dino-game/build/
-
 # Restart Nginx to apply the changes
 sudo systemctl restart nginx
